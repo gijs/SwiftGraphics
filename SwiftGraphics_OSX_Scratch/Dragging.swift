@@ -10,139 +10,134 @@ import Cocoa
 
 import SwiftGraphics
 
-// MARK: -
+public protocol Draggable {
+    var position:CGPoint { get set }
+}
 
-class Dragging: NSObject {
+class Dragging: Renderer {
 
     var model:Model!
-    var clickGestureRecogniser:NSClickGestureRecognizer!
     var panGestureRecognizer:NSPanGestureRecognizer!
+    var draggedObject:Draggable? = nil
+    var dragBeganLocation:CGPoint?
+    var offset:CGPoint = CGPointZero
+    var selectionMarquee:SelectionMarquee = SelectionMarquee()
 
     init(model:Model) {
-        super.init()
-
         self.model = model
-
-        clickGestureRecogniser = NSClickGestureRecognizer(target: self, action: Selector("click:"))
-        panGestureRecognizer = NSPanGestureRecognizer(target: self, action: Selector("pan:"))
+        panGestureRecognizer = NSPanGestureRecognizer(callback:nil)
+        panGestureRecognizer.addCallback() {
+            [unowned self] in
+            self.pan(self.panGestureRecognizer)
+        }
     }
 
     var view:NSView! {
         willSet {
             if let view = view {
-                view.removeGestureRecognizer(clickGestureRecogniser)
                 view.removeGestureRecognizer(panGestureRecognizer)
             }
         }
         didSet {
             if let view = view {
-                view.addGestureRecognizer(clickGestureRecogniser)
                 view.addGestureRecognizer(panGestureRecognizer)
             }
         }
     }
 
-    func click(gestureRecognizer:NSClickGestureRecognizer) {
+    func pan(gestureRecognizer:NSPanGestureRecognizer) {
         switch gestureRecognizer.state {
             case .Began:
-                let location = gestureRecognizer.locationInView(view)
-                if let (index, thing) = hitTest(location) {
-                    unselectAll()
-                    selectObject(thing)
-                    needsDisplay = true
-                    return
-                }
-                else {
-                    unselectAll()
-                    needsDisplay = true
-                }
+                panBegun(gestureRecognizer)
+            case .Changed:
+                panChanged(gestureRecognizer)
+            case .Ended:
+                panEnded(gestureRecognizer)
             default:
                 break
         }
     }
 
-    var draggedObject:Thing? = nil
-    var dragBeganLocation:CGPoint?
-    var offset:CGPoint = CGPointZero
-    var selectionMarquee:SelectionMarquee = SelectionMarquee()
-
-
-    func pan(gestureRecognizer:NSPanGestureRecognizer) {
-        let location = gestureRecognizer.locationInView(view)
-
-        switch gestureRecognizer.state {
-            case .Began:
-                dragBeganLocation = location
-                if let (index, thing) = hitTest(location) {
-                    unselectAll()
-                    draggedObject = thing
-                    selectObject(draggedObject!)
-                    offset = location - draggedObject!.center
-                }
-                else {
-                    self.selectionMarquee.active = true
-                    self.selectionMarquee.panLocation = location
-                    self.view.layer?.addSublayer(self.selectionMarquee.layer)
-
-                }
-            case .Changed:
-                if let draggedObject = draggedObject {
-                    draggedObject.center = location - offset
-                }
-                else {
-                    selectionMarquee.panLocation = location
-
-                    for thing in model.objects {
-
-                        var selected = false
-
-                        switch selectionMarquee.value {
-                            case .rect(let rect):
-                                selected = thing.intersects(rect)
-                            case .polygon(let polygon):
-                                selected = thing.intersects(polygon.cgpath)
-                            default:
-                                break
-                        }
-
-                        if selected {
-                            selectObject(thing)
-                        }
-                        else {
-                            unselectObject(thing)
-                        }
-                    }
-                    needsDisplay = true
-                }
-                break
-            case .Ended:
-                draggedObject = nil
-                offset = CGPointZero
-                self.selectionMarquee.active = false
-                self.selectionMarquee.layer.removeFromSuperlayer()
-
-            default:
-                break
+    func panBegun(gestureRecognizer:NSPanGestureRecognizer) {
+        dragBeganLocation = gestureRecognizer.locationInView(view)
+        draggedObject = hitTest(dragBeganLocation!)
+        if let draggedObject = draggedObject {
+            if let thing = draggedObject as? Thing {
+                unselectAll()
+                selectObject(thing)
+            }
+            offset = dragBeganLocation! - draggedObject.position
         }
-
+        else {
+            selectionMarquee.active = true
+            selectionMarquee.panLocation = dragBeganLocation!
+            view.layer!.addSublayer(selectionMarquee.layer)
+        }
         needsDisplay = true
     }
 
-
-    func selectObject(object:Thing) {
-        model.selectObject(object)
+    func panChanged(gestureRecognizer:NSPanGestureRecognizer) {
+        let location = gestureRecognizer.locationInView(view)
+        if draggedObject != nil {
+            draggedObject!.position = location - offset
+            if let handle = draggedObject as? Handle {
+//                handle.owner.handleChanged(handle)
+            }
+        }
+        else {
+            selectionMarquee.panLocation = location
+            for thing in model.objects {
+                var selected = thing.intersects(selectionMarquee.cgpath)
+                if selected {
+                    selectObject(thing)
+                }
+                else {
+                    unselectObject(thing)
+                }
+            }
+        }
+        needsDisplay = true
     }
 
-    func unselectObject(object:Thing) {
-        model.unselectObject(object)
+    func panEnded(gestureRecognizer:NSPanGestureRecognizer) {
+        draggedObject = nil
+        offset = CGPointZero
+        selectionMarquee.active = false
+        selectionMarquee.layer.removeFromSuperlayer()
+        needsDisplay = true
+    }
+
+    func selectObject(object:Draggable) {
+        if let thing = object as? Thing {
+            model.selectObject(thing)
+        }
+    }
+
+    func unselectObject(object:Draggable) {
+        if let thing = object as? Thing {
+            model.unselectObject(thing)
+        }
     }
 
     func unselectAll() {
         model.selectedObjectIndices.removeAllIndexes()
     }
 
-    func hitTest(location:CGPoint) -> (Int,Thing)? {
-        return model.hitTest(location)
+    func hitTest(location:CGPoint) -> Draggable? {
+        var hit = model.hitTest(location)?.1
+        if let hit = hit {
+            return hit
+        }
+
+        for object in model.selectedObjects {
+            for handle in object.handles {
+                if CGRect(center: handle.position, radius:3).contains(location - object.frame.origin) {
+                    return handle
+                }
+            }
+        }
+
+        return nil
     }
 
     var needsDisplay:Bool {
@@ -154,6 +149,16 @@ class Dragging: NSObject {
         }
     }
 
+    func draw(context:CGContext, object:Any) {
+        if let thing = object as? Thing {
+            context.lineWidth = 2.0
+            context.strokeColor = CGColor.blueColor()
+            thing.geometry.drawInContext(context)
 
+            for handle in thing.handles {
+                context.fillCircle(center: handle.position, radius: 3)
+            }
+        }
+    }
 }
 

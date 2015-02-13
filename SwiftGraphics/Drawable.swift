@@ -9,6 +9,7 @@
 import CoreGraphics
 
 public protocol Drawable {
+    // TODO: drawInContext -> draw
     func drawInContext(context:CGContextRef)
 }
 

@@ -9,11 +9,13 @@
 import QuartzCore
 import SwiftGraphics
 
-class SelectionMarquee {
+public class SelectionMarquee {
     enum Mode {
         case rectangular
         case polygonal
     }
+
+    // TODO: Replace Value with CGPathable
     enum Value {
         case empty
         case rect(CGRect)
@@ -52,6 +54,17 @@ class SelectionMarquee {
                 value = .empty
                 layer.path = nil
             }
+        }
+    }
+
+
+
+    func intersects(path:CGPath) -> Bool {
+        switch value {
+            case .polygon(let polygon):
+                return polygon.cgpath.intersects(path)
+            default:
+                return false
         }
     }
 
@@ -96,5 +109,20 @@ class SelectionMarquee {
             CATransaction.commit()
         }
     }
+}
+
+extension SelectionMarquee: CGPathable {
+
+    public var cgpath:CGPath {
+        get {
+            switch value {
+                case .polygon(let polygon):
+                    return polygon.cgpath
+                default:
+                    return CGPathCreateMutable()
+            }
+        }
+    }
+
 
 }

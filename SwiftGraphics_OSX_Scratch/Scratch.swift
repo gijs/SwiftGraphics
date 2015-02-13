@@ -96,6 +96,15 @@ extension Array {
 
 // MARK: -
 
+//func findIdentity<C : CollectionType>(domain: C, value: C.Generator.Element) -> C.Index? {
+//    for (index, object) in enumerate(domain) {
+//        if object === value {
+//            return index
+//        }
+//    }
+//    return nil
+//}
+
 extension NSIndexSet {
 
     func with <T>(array:Array <T>, maxCount:Int = 512, block:Array <T> -> Void) {

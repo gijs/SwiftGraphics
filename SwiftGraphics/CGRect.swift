@@ -73,9 +73,19 @@ public func * (lhs:CGFloat, rhs:CGRect) -> CGRect {
 
 public extension CGRect {
 
-    var mid: CGPoint {
+    var center: CGPoint {
         get {
             return midXMidY
+        }
+        set {
+            origin += newValue - center
+        }
+    }
+
+    // TODO: Deprecate
+    var mid: CGPoint {
+        get {
+            return center
         }
     }
 

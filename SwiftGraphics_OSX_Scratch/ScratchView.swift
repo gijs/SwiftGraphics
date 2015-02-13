@@ -20,10 +20,12 @@ class ScratchView: NSView {
         }
     }
     var dragging:Dragging!
+    var renderer:Renderer!
 
     required init?(coder: NSCoder) {
         super.init(coder:coder)
         wantsLayer = true
+        renderer = DrawableRenderer()
     }
 
     override var acceptsFirstResponder:Bool {
@@ -32,72 +34,31 @@ class ScratchView: NSView {
         }
     }
 
-    override func keyDown(theEvent: NSEvent) {
-        interpretKeyEvents([theEvent])
-    }
-
-    override func deleteBackward(sender: AnyObject?) {
-        model.removeObjectsAtIndices(model.selectedObjectIndices)
-    }
-
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)
 
         let context = NSGraphicsContext.currentContext()!.CGContext
 
         for (index, thing) in enumerate(model.objects) {
-            if model.selectedObjectIndices.containsIndex(index) {
-                context.strokeColor = CGColor.redColor()
+            let localTransform = CGAffineTransform(translation: thing.frame.origin)
+            context.with(localTransform) {
+                if model.selectedObjectIndices.containsIndex(index) {
+                    dragging.draw(context, object:thing)
+                }
+                else {
+                    renderer.draw(context, object:thing)
+                }
             }
-            thing.drawInContext(context)
         }
 
-//        context.plotPoints(locations)
-        if let startLocation = startLocation, currentLocation = currentLocation {
-            context.strokeColor = CGColor.redColor()
-            context.lineWidth = 1.0
-            context.lineDash = [10, 10]
-            context.strokeLine(startLocation, currentLocation)
-            context.lineDash = []
-        }
+        gestureDebugger.drawInContext(context)
     }
 
-    var locations:[CGPoint] = []
-    var startLocation:CGPoint?
-    var currentLocation:CGPoint?
-
+    var gestureDebugger = GestureDebugger()
 
     override func addGestureRecognizer(gestureRecognizer: NSGestureRecognizer) {
         super.addGestureRecognizer(gestureRecognizer)
-
-        if gestureRecognizer.isKindOfClass(NSPanGestureRecognizer.self) {
-            gestureRecognizer.addCallback() {
-                [unowned self] in
-                let location = gestureRecognizer.locationInView(self)
-
-
-                switch gestureRecognizer.state {
-                    case .Began:
-                        self.startLocation = location
-                        MagicLog("startLocation", location)
-                    case .Changed:
-                        MagicLog("location", location)
-                        let delta = location - self.startLocation!
-                        MagicLog("delta", location - delta)
-
-                        let angle = atan2(delta)
-//                        self.startLocation!.angleTo(location))
-
-                        MagicLog("angle", RadiansToDegrees(angle))
-
-                        self.currentLocation = location
-                    default:
-                        break
-                }
-                self.locations.append(location)
-                self.needsDisplay = true
-            }
-        }
+        gestureDebugger.addGestureRecognizer(gestureRecognizer)
     }
 
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject: AnyObject], context: UnsafeMutablePointer<Void>) {

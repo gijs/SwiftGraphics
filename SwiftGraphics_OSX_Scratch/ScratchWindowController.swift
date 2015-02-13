@@ -24,6 +24,7 @@ class ScratchWindowController: NSWindowController {
         model = Model()
     }
 
+
     @IBAction func insertShape(sender:AnyObject?) {
 
         var type:String!

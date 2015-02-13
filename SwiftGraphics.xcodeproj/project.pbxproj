@@ -152,6 +152,8 @@
 		4598FD931A8D063700F48BF7 /* CPPRandom.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4598FD921A8D063700F48BF7 /* CPPRandom.mm */; };
 		4598FD941A8D063700F48BF7 /* CPPRandom.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4598FD921A8D063700F48BF7 /* CPPRandom.mm */; };
 		4598FD961A8D256800F48BF7 /* CPPRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = 4598FD951A8D250300F48BF7 /* CPPRandom.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4598FD981A8E745800F48BF7 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4598FD971A8E745800F48BF7 /* Renderer.swift */; };
+		4598FD9A1A8E9E3D00F48BF7 /* Thing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4598FD991A8E9E3D00F48BF7 /* Thing.swift */; };
 		459A4C4C1A69913600E87608 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459A4C4B1A69913600E87608 /* Circle.swift */; };
 		459A4C4D1A69913600E87608 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459A4C4B1A69913600E87608 /* Circle.swift */; };
 		459A4C4F1A69914000E87608 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C11B5A1A69751B0029A61C /* Triangle.swift */; };
@@ -222,6 +224,7 @@
 		45F32C731A6455BB00E3DA68 /* CGColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F32C711A6455BB00E3DA68 /* CGColor.swift */; };
 		45F32C751A64590E00E3DA68 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F32C741A64590E00E3DA68 /* Color.swift */; };
 		45F32C761A64590E00E3DA68 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F32C741A64590E00E3DA68 /* Color.swift */; };
+		45F51F161A8EF45F00F18810 /* GestureDebugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F51F151A8EF45F00F18810 /* GestureDebugger.swift */; };
 		45F5CE1D1A74092100F4B15D /* AssociatedObjects+Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F5CE1C1A74092100F4B15D /* AssociatedObjects+Private.swift */; };
 		45F5CE211A74094000F4B15D /* AssociatedObjects+Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F5CE1C1A74092100F4B15D /* AssociatedObjects+Private.swift */; };
 		45FA46511A7F3DBB000473B5 /* Rectangle+Markup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA46501A7F3DBB000473B5 /* Rectangle+Markup.swift */; };
@@ -425,6 +428,8 @@
 		459673EA1A81A0CE00BDF9D5 /* Scratch.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Scratch.playground; sourceTree = "<group>"; };
 		4598FD921A8D063700F48BF7 /* CPPRandom.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CPPRandom.mm; sourceTree = "<group>"; };
 		4598FD951A8D250300F48BF7 /* CPPRandom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPPRandom.h; sourceTree = "<group>"; };
+		4598FD971A8E745800F48BF7 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		4598FD991A8E9E3D00F48BF7 /* Thing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thing.swift; sourceTree = "<group>"; };
 		459A4C4B1A69913600E87608 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
 		459EE5DC19AEC5130012E023 /* BezierCurve.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BezierCurve.swift; sourceTree = "<group>"; };
 		459EE5DD19AEC5130012E023 /* CGAffineTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGAffineTransform.swift; sourceTree = "<group>"; };
@@ -478,6 +483,7 @@
 		45ECEC301A6561D60018F7C6 /* BezierPath.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = BezierPath.playground; sourceTree = "<group>"; };
 		45F32C711A6455BB00E3DA68 /* CGColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGColor.swift; sourceTree = "<group>"; };
 		45F32C741A64590E00E3DA68 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		45F51F151A8EF45F00F18810 /* GestureDebugger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureDebugger.swift; sourceTree = "<group>"; };
 		45F5CE1C1A74092100F4B15D /* AssociatedObjects+Private.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AssociatedObjects+Private.swift"; sourceTree = "<group>"; };
 		45FA46501A7F3DBB000473B5 /* Rectangle+Markup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rectangle+Markup.swift"; sourceTree = "<group>"; };
 		45FA46531A7F3EA9000473B5 /* Circle+Markup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Circle+Markup.swift"; sourceTree = "<group>"; };
@@ -797,11 +803,14 @@
 				45124C9A1A89E16F000F5ABB /* MagicConsole */,
 				455AC2C71A76130B00BCC373 /* AppDelegate.swift */,
 				4508FAE01A8C5C7D00E648D5 /* Handleable.swift */,
+				4598FD971A8E745800F48BF7 /* Renderer.swift */,
 				45CA2A671A7EFC83008DC058 /* ScratchWindowController.swift */,
 				455AC2C91A76130B00BCC373 /* ViewController.swift */,
 				45CA2A611A7EF4AE008DC058 /* Model.swift */,
+				4598FD991A8E9E3D00F48BF7 /* Thing.swift */,
 				455AC2E81A76135600BCC373 /* ScratchView.swift */,
 				45C545571A815FEA00C60723 /* Dragging.swift */,
+				45F51F151A8EF45F00F18810 /* GestureDebugger.swift */,
 				45BA16371A8A7FA300120AD2 /* Utilities */,
 				452F09171A81D2DD00334A4E /* SelectionMarquee.swift */,
 				455AC2CB1A76130B00BCC373 /* Images.xcassets */,
@@ -1436,9 +1445,12 @@
 				458E37811A8A70460042F750 /* NSObject+Extensions.m in Sources */,
 				45CA2A621A7EF4AE008DC058 /* Model.swift in Sources */,
 				45B78E631A7702F80058B3A0 /* Scratch.swift in Sources */,
+				4598FD981A8E745800F48BF7 /* Renderer.swift in Sources */,
+				4598FD9A1A8E9E3D00F48BF7 /* Thing.swift in Sources */,
 				455AC2CA1A76130B00BCC373 /* ViewController.swift in Sources */,
 				45C545581A815FEA00C60723 /* Dragging.swift in Sources */,
 				452F09181A81D2DD00334A4E /* SelectionMarquee.swift in Sources */,
+				45F51F161A8EF45F00F18810 /* GestureDebugger.swift in Sources */,
 				455AC2C81A76130B00BCC373 /* AppDelegate.swift in Sources */,
 				45CA2A681A7EFC83008DC058 /* ScratchWindowController.swift in Sources */,
 				455AC2E91A76135600BCC373 /* ScratchView.swift in Sources */,

@@ -28,5 +28,12 @@ class ViewController: NSViewController {
         }
     }
 
-}
+    override func keyDown(theEvent: NSEvent) {
+        interpretKeyEvents([theEvent])
+    }
 
+    override func deleteBackward(sender: AnyObject?) {
+        model.removeObjectsAtIndices(model.selectedObjectIndices)
+        view.needsDisplay = true
+    }
+}
