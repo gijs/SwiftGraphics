@@ -97,6 +97,7 @@ extension GenericSize: SizeType {
 // MARK: Generic Rects
 
 public struct GenericRect <T:PointType, U:SizeType> {
+    typealias ScalarType = T.ScalarType
     public let origin:T
     public let size:U
 
@@ -137,6 +138,16 @@ public func == <T> (lhs:GenericSize <T>, rhs:GenericSize <T>) -> Bool {
     return lhs.width == rhs.width && lhs.height == rhs.height
 }
 
+extension GenericSize: Printable {
+    public var description: String {
+        get {
+            let widthString = toString(width)
+            let heightString = toString(width)
+            return "Size(width:\(widthString), height:\(heightString))"
+        }
+    }
+}
+
 // TODO: Need more generic magic
 
 //extension GenericRect: Equatable {
@@ -146,3 +157,12 @@ public func == <T> (lhs:GenericSize <T>, rhs:GenericSize <T>) -> Bool {
 //    return lhs.origin == rhs.origin && lhs.size == rhs.size
 //}
 
+//extension GenericRect {
+//    var minX:ScalarType { get { return origin.x + size.width } }
+//    var midX:ScalarType { get { return minX + maxX / 2 } }
+//    var maxX:ScalarType { get { return origin.x + size.width - 1 } }
+//}
+//
+//
+//
+//

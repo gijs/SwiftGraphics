@@ -103,7 +103,6 @@
 		4537991A19AA6C37004DF99E /* CGPointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4537991919AA6C37004DF99E /* CGPointTests.swift */; };
 		4537991D19AA788B004DF99E /* CGSizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4537991C19AA788B004DF99E /* CGSizeTests.swift */; };
 		453997C91A61F89F00572E47 /* BouncingBalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453997C31A61F89F00572E47 /* BouncingBalls.swift */; };
-		453997CA1A61F89F00572E47 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453997C41A61F89F00572E47 /* Grid.swift */; };
 		453997CB1A61F89F00572E47 /* MarchingSquares.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453997C51A61F89F00572E47 /* MarchingSquares.swift */; };
 		453997CC1A61F89F00572E47 /* MetaballsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453997C61A61F89F00572E47 /* MetaballsView.swift */; };
 		453997CD1A61F89F00572E47 /* Polygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453997C71A61F89F00572E47 /* Polygon.swift */; };
@@ -208,6 +207,7 @@
 		45CFDCA51A61CE3500053F96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CFDCA41A61CE3500053F96 /* ViewController.swift */; };
 		45CFDCA71A61CE3500053F96 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45CFDCA61A61CE3500053F96 /* Images.xcassets */; };
 		45CFDCAA1A61CE3500053F96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45CFDCA81A61CE3500053F96 /* Main.storyboard */; };
+		45D6A0571A9237A400141562 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453997C41A61F89F00572E47 /* Grid.swift */; };
 		45DA4AC919AA62A800133F32 /* SwiftGraphics.h in Headers */ = {isa = PBXBuildFile; fileRef = 45DA4AC819AA62A800133F32 /* SwiftGraphics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45E298741A69B2F5006FE740 /* BezierCurveChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E298721A69B2DC006FE740 /* BezierCurveChain.swift */; };
 		45E298751A69B2F6006FE740 /* BezierCurveChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E298721A69B2DC006FE740 /* BezierCurveChain.swift */; };
@@ -465,6 +465,7 @@
 		45C6DC741A13E59C004C4693 /* TransformTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
 		45CA2A611A7EF4AE008DC058 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		45CA2A671A7EFC83008DC058 /* ScratchWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScratchWindowController.swift; sourceTree = "<group>"; };
+		45CD48DC1A91BDA5004E1328 /* DiamondSquare.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = DiamondSquare.playground; sourceTree = "<group>"; };
 		45CFDC651A61CA0700053F96 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		45CFDC671A61CB3000053F96 /* GrahamScan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrahamScan.swift; sourceTree = "<group>"; };
 		45CFDC6B1A61CB6800053F96 /* ConvexHull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvexHull.swift; sourceTree = "<group>"; };
@@ -772,6 +773,7 @@
 				459673EA1A81A0CE00BDF9D5 /* Scratch.playground */,
 				45E38D311A7424F600EC672A /* Broken or Limited Usefulness */,
 				45E38D321A74254000EC672A /* Very WIP */,
+				45CD48DC1A91BDA5004E1328 /* DiamondSquare.playground */,
 			);
 			path = Playgrounds;
 			sourceTree = "<group>";
@@ -1440,6 +1442,7 @@
 				450717091A6B7F0700E86EB4 /* CGTypes+String.swift in Sources */,
 				454FE68019C77455002E4DEF /* SwiftGraphicsPlayground.swift in Sources */,
 				450717071A6B7EBA00E86EB4 /* Bitmap.swift in Sources */,
+				45D6A0571A9237A400141562 /* Grid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1470,7 +1473,6 @@
 				45CFDCA51A61CE3500053F96 /* ViewController.swift in Sources */,
 				453997C91A61F89F00572E47 /* BouncingBalls.swift in Sources */,
 				4514F60E1A61D4C400CC9C26 /* ArcView.swift in Sources */,
-				453997CA1A61F89F00572E47 /* Grid.swift in Sources */,
 				455621911A6A2DD800EB181E /* Scratch.swift in Sources */,
 				4514F6151A61D4C400CC9C26 /* QuadTreeView.swift in Sources */,
 				4514F61D1A61D4C400CC9C26 /* TestArc.swift in Sources */,

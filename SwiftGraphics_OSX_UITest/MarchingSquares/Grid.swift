@@ -10,18 +10,27 @@ import CoreGraphics
 
 import SwiftGraphics
 
-class Grid_Array <T> {
-    let size:(width:Int,height:Int)
-    var buffer:Array<T>
+public class Grid_Array <T> {
+    public let size:IntSize
+    public var buffer:Array<T>
     
-    init(width:Int, height:Int, defaultValue:T) {
-        size = (width, height)
+    public init(width:Int, height:Int, defaultValue:T) {
+        size = IntSize(width:width, height:height)
         
         let count = width * height
         buffer = Array<T> (count:count, repeatedValue:defaultValue)
     }
- 
-    subscript (index:IntPoint) -> T {
+
+    public subscript (x:Int, y:Int) -> T {
+        get {
+            return buffer[x + y * size.width]
+        }
+        set {
+            buffer[x + y * size.width] = newValue
+        }
+    }
+
+    public subscript (index:IntPoint) -> T {
         get {
             return buffer[index.x + index.y * size.width]
         }
@@ -30,6 +39,35 @@ class Grid_Array <T> {
         }
     }
 }
+
+extension Grid_Array {
+    public func row(y:Int) -> [T] {
+        let row:[T] = (0..<size.width).map() {
+            return self[$0, y]
+        }
+        return row
+    }
+    public func rows() -> [[T]] {
+        let rows:[[T]] = (0..<size.height).map() {
+            return self.row($0)
+        }
+        return rows
+    }
+}
+
+extension Grid_Array: Printable {
+    public var description: String {
+        get {
+            let description = ",\n".join(rows().map() {
+                return ", ".join($0.map() {
+                    return toString($0)
+                })
+            })
+            return description
+        }
+    }
+}
+
 
 class Grid_Buffer <T> { 
 
