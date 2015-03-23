@@ -9,6 +9,7 @@
 import Cocoa
 import SwiftGraphics
 import SwiftGraphicsPlayground
+import SwiftUtilities
 
 class Ball {
     var position:CGPoint

@@ -10,6 +10,7 @@ import Cocoa
 
 import SwiftGraphics
 import SwiftGraphicsPlayground
+import SwiftUtilities
 
 class SketchView: NSView {
 
@@ -117,3 +118,27 @@ class SketchView: NSView {
     }
 }
 
+
+
+public extension NSColor {
+    convenience init(rgba:UInt32, bgra:Bool = true) {
+        let (rs:UInt32, gs:UInt32, bs:UInt32) = bgra ? (8, 16, 24) : (24, 16, 8)
+    
+    
+        let r = CGFloat((rgba >> rs) & 0xFF) / 255
+        let g = CGFloat((rgba >> gs) & 0xFF) / 255
+        let b = CGFloat((rgba >> bs) & 0xFF) / 255
+        let a = CGFloat(rgba & 0b1111_1111) / 255
+        self.init(deviceRed:r, green:g, blue:b, alpha:a)
+    }
+    
+    var asUInt32:UInt32 {
+        get {
+            let r = UInt32(redComponent * 255)
+            let g = UInt32(greenComponent * 255)
+            let b = UInt32(blueComponent * 255)
+            let a = UInt32(alphaComponent * 255)
+            return r << 24 | g << 16 | b << 8 | a
+        }
+    }
+}

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUtilities
 
 public extension CGFloat {
     init(string:String) {

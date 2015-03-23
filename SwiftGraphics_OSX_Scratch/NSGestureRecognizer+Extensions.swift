@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import SwiftGraphics
+import SwiftUtilities
 
 extension NSGestureRecognizer {
 

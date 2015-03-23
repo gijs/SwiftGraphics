@@ -7,6 +7,7 @@
 //
 
 import SwiftGraphics
+import SwiftUtilities
 
 // MARK: -
 
@@ -111,7 +112,7 @@ extension NSIndexSet {
 
     func with(maxCount:Int = 512, block:UnsafeBufferPointer <Int> -> Void) {
 
-        var range = NSRange(location:0, length:self.count)
+        var range = NSMakeRange(0, count)
         var indices = Array <Int> (count:maxCount, repeatedValue: NSNotFound)
         indices.withUnsafeMutableBufferPointer() {
             (inout buffer:UnsafeMutableBufferPointer<Int>) -> Void in
