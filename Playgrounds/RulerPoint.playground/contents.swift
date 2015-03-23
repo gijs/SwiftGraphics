@@ -3,6 +3,7 @@
 import Cocoa
 import CoreGraphics
 import SwiftGraphics
+import SwiftUtilities
 
 let size = CGSize(w:100, h:100)
 let context = CGContextRef.bitmapContext(size)
