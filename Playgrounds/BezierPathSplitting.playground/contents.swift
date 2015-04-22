@@ -14,6 +14,8 @@ let points = [
 let curve = BezierCurve(points:points)
 let (leftCurve, rightCurve) = curve.split(0.85)
 
+// ###################################
+
 let cgimage = CGContextRef.imageWithBlock(CGSize(w:250, h:250), color:CGColor.lightGrayColor(), origin:CGPointZero) {
     (context:CGContext) -> Void in
 
@@ -35,7 +37,7 @@ let cgimage = CGContextRef.imageWithBlock(CGSize(w:250, h:250), color:CGColor.li
     context.lineWidth = 1.0
     var newPoints:[CGPoint] = []
     for var N:CGFloat = 0; N <= 1; N += 0.1 {
-        newPoints.append(curve.pointAlongCurve(N))
+        newPoints.append(pointOnCurve(curve, N))
     }
     context.strokeColor = CGColor.blackColor()
     context.plotPoints(newPoints)
@@ -43,3 +45,4 @@ let cgimage = CGContextRef.imageWithBlock(CGSize(w:250, h:250), color:CGColor.li
 
 let image = NSImage(CGImage: cgimage, size: cgimage.size)  
 image
+

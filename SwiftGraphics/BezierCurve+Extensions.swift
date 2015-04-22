@@ -10,6 +10,8 @@
 
 import CoreGraphics
 
+import Foundation
+
 // MARK: Getting a point from and splitting curves.
 
 public extension BezierCurve {
@@ -262,3 +264,53 @@ public extension BezierCurve {
         0.01234122979998720018302016399047715, 0.01234122979998720018302016399047715,
     ]
 }
+
+var cache = Dictionary <Int, [(CGFloat,CGPoint)]> ()
+
+
+// TODO: Rename
+public func pointOnCurve(curve:BezierCurve, r:CGFloat) -> CGPoint {
+
+    if r == 0.0 {
+        return curve.start!
+    }
+    else if r == 1.0 {
+        return curve.end
+    }
+
+    // TODO: Cache.
+    var myPoints:[(CGFloat,CGPoint)]! = cache[curve.hashValue]
+    if myPoints == nil {
+        myPoints = []
+        for var N:CGFloat = 0; N <= 1; N += 0.001 {
+            let (leftCurve, _) = curve.split(N)
+            let length = leftCurve.length / curve.length
+            let point = leftCurve.end
+            myPoints.append((length,point))
+        }
+        cache[curve.hashValue] = myPoints
+    }
+
+
+
+    let (found, index) = SwiftGraphics.bsearch_closest(myPoints) {
+        return SwiftGraphics.compare($0.0, r)
+    }
+
+    if found == true {
+       return myPoints[index].1
+    }
+    else {
+        if index + 1 == myPoints.count {
+            return curve.end
+        }
+
+        let low = myPoints[index]
+        let high = myPoints[index + 1]
+        let f = (r - low.0) / (high.0 - low.0)
+        return lerp(low.1, high.1, f)
+    }
+}
+
+
+

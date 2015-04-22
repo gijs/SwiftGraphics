@@ -14,6 +14,21 @@ extension CGPoint: Printable {
     public var description: String { get { return "\(x), \(y)" } }
 }
 
+
+extension CGPoint: Hashable {
+    public var hashValue: Int {
+        get {
+            return x.hashValue ^ y.hashValue
+        }
+    }
+}
+
+//public func ==(lhs: CGPoint, rhs: CGPoint) -> Bool {
+//    return lhs.x == rhs.start && lhs.points == rhs.points && lhs.end == lhs.end
+//}
+
+
+
 // MARK: Convenience initializers
 
 public extension CGPoint {

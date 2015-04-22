@@ -8,6 +8,17 @@
 
 import CoreGraphics
 
+// TODO: Refactor this beast.
+/*
+Break BezierCurve into QuadraticCurve, CubicCurve, RelativeQuadraticCurve, RelativeCubicCurve
+
+Non-relative versions _have_ start points.
+Most functions are on the non-relative versions.
+Can convert relative into non-relative by providing a start point.
+Get rid of order.
+Provide a BezierCurve protocol
+*/
+
 public struct BezierCurve {
 
     public enum Order {
@@ -54,6 +65,26 @@ public struct BezierCurve {
         }
     }
 }
+
+extension BezierCurve: Hashable {
+    public var hashValue: Int {
+        get {
+
+            var hashValue = 0
+            hashValue ^= start!.hashValue
+            for point in points {
+                hashValue ^= point.hashValue
+            }
+            hashValue ^= end.hashValue
+            return hashValue
+        }
+    }
+}
+
+public func ==(lhs: BezierCurve, rhs: BezierCurve) -> Bool {
+    return lhs.start == rhs.start && lhs.points == rhs.points && lhs.end == lhs.end
+}
+
 
 // MARK: Good old Printable.
 
