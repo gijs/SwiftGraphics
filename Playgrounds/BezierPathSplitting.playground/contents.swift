@@ -11,38 +11,30 @@ let points = [
     CGPoint(x:220,y:40),
 ]
 
-let curve = BezierCurve(points:points)
-let (leftCurve, rightCurve) = curve.split(0.85)
-
-// ###################################
-
-let cgimage = CGContextRef.imageWithBlock(CGSize(w:250, h:250), color:CGColor.lightGrayColor(), origin:CGPointZero) {
-    (context:CGContext) -> Void in
-
+func drawCurve(context:CGContext, curve:BezierCurve, point:(BezierCurve,CGFloat) -> CGPoint) {
     // Draw the whole bezier curve in green
-    context.strokeColor = CGColor.greenColor().withAlpha(0.25)
-    context.lineWidth = 8.0
+    context.strokeColor = CGColor.blackColor().withAlpha(0.5)
+
     context.stroke(curve)
-    context.lineWidth = 2.0
-
-    // Draw the "left" portion of the curve in blue
-    context.strokeColor = CGColor.blueColor()
-    context.stroke(leftCurve)
-
-    // Draw the "right" portion of the curve in red
-    context.strokeColor = CGColor.redColor()
-    context.stroke(rightCurve)
 
     // Get points along the curve and plot them
-    context.lineWidth = 1.0
-    var newPoints:[CGPoint] = []
-    for var N:CGFloat = 0; N <= 1; N += 0.1 {
-        newPoints.append(pointOnCurve(curve, N))
+    var newPoints:[CGPoint] = map(stride(from: 0.0, through: 1.0, by: 0.1)) {
+        return point(curve, $0)
     }
-    context.strokeColor = CGColor.blackColor()
+
+    context.strokeColor = CGColor.blueColor()
     context.plotPoints(newPoints)
 }
 
-let image = NSImage(CGImage: cgimage, size: cgimage.size)  
-image
+let cgimage = CGContextRef.imageWithBlock(CGSize(w:500, h:250), color:CGColor.lightGrayColor(), origin:CGPointZero) {
+    (context:CGContext) -> Void in
+
+    let curve = BezierCurve(points:points)
+    drawCurve(context, curve) { pointOnCurve($0, $1) }
+
+    CGContextTranslateCTM(context, 250, 0)
+    drawCurve(context, curve) { $0.pointAlongCurve($1) }
+}
+
+NSImage(CGImage: cgimage, size: cgimage.size)
 
