@@ -4,6 +4,7 @@ import Cocoa
 import SwiftGraphics
 import SwiftGraphicsPlayground
 import XCPlayground
+import SwiftUtilities
 
 let context = CGContextRef.bitmapContext(CGSize(w:480, h:320), origin:CGPoint(x:0.0, y:0.0))
 context.style

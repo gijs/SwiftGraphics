@@ -3,13 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>14D105g</string>
+	<string>14E7f</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
 	<string>SwiftUtilities</string>
 	<key>CFBundleIdentifier</key>
-	<string>schwa.io.SwiftUtilities</string>
+	<string>io.schwa.SwiftUtilities</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -25,16 +25,16 @@
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>6D543q</string>
+	<string>6D1002</string>
 	<key>DTPlatformVersion</key>
 	<string>GM</string>
 	<key>DTSDKBuild</key>
-	<string>14D98g</string>
+	<string>14D125</string>
 	<key>DTSDKName</key>
 	<string>macosx10.10</string>
 	<key>DTXcode</key>
-	<string>0630</string>
+	<string>0631</string>
 	<key>DTXcodeBuild</key>
-	<string>6D543q</string>
+	<string>6D1002</string>
 </dict>
 </plist>
